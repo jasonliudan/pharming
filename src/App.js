@@ -5,7 +5,6 @@ import store, { history } from './store';
 
 import { createGlobalStyle } from 'styled-components';
 import Header from 'components/header';
-import Farms from 'screens/farms';
 import Farm from 'screens/farm';
 import GeoFont from 'assets/fonts/Geo-Regular.ttf';
 
@@ -17,13 +16,12 @@ class App extends Component {
       <Provider store={store}>
         <Router history={history} basename={'/pharming'}>
           <GlobalStyle />
-          <div className="bgimg">
+          <div className="bgdiv">
             <Header />
 
-            <div className="middle">
+            <div className="mainArea">
               <Switch>
-                <Route exact path="/" component={Farms} />
-                <Route exact path="/farm/:pid" component={Farm} />
+                <Route exact path="/pharming" component={Farm} />
               </Switch>
             </div>
 
@@ -47,8 +45,13 @@ export const GlobalStyle = createGlobalStyle`
     margin: 10px 0px;
   }
 
-  .bgimg {
-    background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
+  .header{
+    width: 40%;
+  }
+  .bgdiv {
+    display: flex;
+    justifyContent: flex-between;
+    background-color: #4a9eff;
     height: 100%;
     background-position: center;
     background-size: cover;
@@ -74,13 +77,13 @@ export const GlobalStyle = createGlobalStyle`
     left: 16px;
   }
 
-  .middle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 1000px;
-    transform: translate(-50%, -50%);
-    text-align: center;
+  .mainArea {
+    width: 60%;
+  }
+
+  .cardWrapper{
+    width: 50%;
+    textAlign: center;
   }
 `;
 

@@ -45,6 +45,11 @@ async function getTotalSupply(contract) {
     return parseInt(result);
 }
 
+async function getMaximumStakingAmount(contract){
+    const result = await contract.methods.maximumStakingAmount().call();
+    return parseInt(result);
+}
+
 /**
  * StakingRewards Pool Contract Functions
  */
@@ -118,6 +123,7 @@ export default {
     getContract,
     getBalance,
     getTotalSupply,
+    getMaximumStakingAmount,
     approve,
     allowance,
     poolGetEarned,

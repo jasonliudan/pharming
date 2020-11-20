@@ -41,13 +41,6 @@ const StakeDialog = ({
                 </span>
             </DialogTitle>
             <DialogContent>
-                <div>
-                    Community distributes <b>{poolBalance}</b>&nbsp; {rewardToken.symbol} as rewards
-                </div>
-                <div>
-                    Total staked {stakeToken.symbol} by Community is &nbsp;
-                    <b>{numberWithDecimals(totalStaked, stakeToken.decimals, Config.Utils.decimals)}</b>
-                </div>
                 <span>
                     Your {stakeToken.symbol} Balance is&nbsp;
                     <b>{numberWithDecimals(userBalance, stakeToken.decimals, Config.Utils.decimals)}</b>&nbsp;

@@ -1,45 +1,32 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-
-import { WalletConnectButton } from 'components/basicComponents';
-import { setAccount } from 'actions';
-import Web3Client from 'api/web3client';
 
 class Header extends Component {
 
-    async connectMetamask() {
-        const account = await Web3Client.getAccount();
-        this.props.setAccount(account);
-    }
-
     render() {
-        const { account } = this.props;
         return (
-            <div>
-                <div className="topleft">
-                    <Link to={{ pathname: '/' }} style={{ textDecoration: 'none', color: 'white' }}>
-                        <p>PHARMING</p>
-                    </Link>
-                </div>
-                <div className="topright">
-                    {account === null ?
-                        <WalletConnectButton
-                            onClick={() => this.connectMetamask()}>CONNECT WALLET</WalletConnectButton> :
-                        <p>{account}</p>
-                    }
+            <div className='header'>
+                <Link to={{ pathname: '/pharming' }} style={{ textDecoration: 'none', color: 'white' }}>
+                    <div style={{display: 'flex', width: 'fit-content', margin: 'auto', marginTop: '30px', marginBottom: '30px'}}>
+                        <img src={require('assets/logo.png')} alt='logo' width={96} height={96}/>
+                        <div style={{ marginLeft: '18px'}}>
+                            <h1 style={{ margin: '14px 0px 0px 0px', fontSize: '42px', lineHeight: '40px' }}>PHANTASMA</h1>
+                            <p style={{ margin: '0px', fontSize: '35px', lineHeight: '28px' }}>Pharming</p>
+                        </div>
+                    </div>
+                </Link>
+                <div style={{textAlign: 'center'}}>
+                    <img src={require('assets/main-image.svg')} alt='logo'
+                    style={{
+                        maxWidth: '90%',
+                        width: '500px',
+                        margin: 'auto',
+                        marginTop: '33%'
+                    }} />
                 </div>
             </div>
         );
     }
 }
 
-
-const mapStateToProps = state => ({
-    account: state.accountReducer.account
-});
-const mapDispatchToProps = dispatch => ({
-    setAccount: (account) => dispatch(setAccount(account))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

@@ -41,7 +41,6 @@ const FarmCardWrapper = styled.div`
     padding: 20px;
     border-radius: 15px;
     background-color: #1D2D50;
-    font-family: "Geo",sans-serif;
 `
 
 export default withRouter(PoolCard);

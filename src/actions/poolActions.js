@@ -144,3 +144,15 @@ export const poolGetPeriodFinishSuccess = (payload) => {
         payload
     }
 };
+
+export const poolGetMaximumStakingAmount = () => {
+    return {
+        type: constants.POOL_GET_MAXIMUM_STAKING_AMOUNT
+    }
+}
+export const poolGetMaximumStakingAmountSuccess = (payload) => {
+    return {
+        type: constants.POOL_GET_MAXIMUM_STAKING_AMOUNT_SUCCESS,
+        payload
+    }
+}

@@ -12,6 +12,7 @@ const initialState = {
     stakeTokenBalance: 0,
     earned: 0,
     periodFinish: new Date(),
+    maximumStakingAmount: 0
 };
 
 export default function setBrowserInfo(state = initialState, action) {
@@ -75,6 +76,11 @@ export default function setBrowserInfo(state = initialState, action) {
             return {
                 ...state,
                 periodFinish: action.payload
+            }
+        case constants.POOL_GET_MAXIMUM_STAKING_AMOUNT_SUCCESS:
+            return {
+                ...state,
+                maximumStakingAmount: action.payload
             }
         default:
             return state;

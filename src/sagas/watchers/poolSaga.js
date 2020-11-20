@@ -11,7 +11,8 @@ import {
     poolGetStakeTokenBalanceSuccess,
     poolGetStakeTokenBalance,
     poolGetTotalStakedSuccess,
-    poolGetPeriodFinishSuccess
+    poolGetPeriodFinishSuccess,
+    poolGetMaximumStakingAmountSuccess
 } from 'actions/poolActions';
 
 function* loadAllowance() {
@@ -162,6 +163,19 @@ function* getPeriodFinish() {
     }
 }
 
+function* getMaximumStakingAmount() {
+    try {
+        const state = yield select();
+        const poolContract = state.poolReducer.contract;
+        if (!poolContract) return;
+        
+        const maximumStakingAmount = yield web3client.getMaximumStakingAmount(poolContract);
+        yield put(poolGetMaximumStakingAmountSuccess(maximumStakingAmount));
+    } catch (err) {
+        yield put(poolGetMaximumStakingAmountSuccess(new Date()));
+    }
+}
+
 export default function* watchGetUsersSaga() {
     yield takeLatest(constants.POOL_LOAD_ALLOWANCE, loadAllowance);
     yield takeLatest(constants.POOL_APPROVE_TOKEN, approve);
@@ -173,4 +187,5 @@ export default function* watchGetUsersSaga() {
     yield takeLatest(constants.POOL_GET_STAKED, getStaked);
     yield takeLatest(constants.POOL_GET_STAKE_TOKEN_BALANCE, getStakeTokenBalance);
     yield takeLatest(constants.POOL_GET_PERIOD_FINISH, getPeriodFinish);
+    yield takeLatest(constants.POOL_GET_MAXIMUM_STAKING_AMOUNT, getMaximumStakingAmount);
 }
