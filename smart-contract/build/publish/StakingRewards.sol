@@ -498,6 +498,11 @@ interface IStakingRewards {
 
     function balanceOf(address account) external view returns (uint256);
 
+    function getStakedTokenWithdrawableDates(address account)
+        external
+        view
+        returns (uint256);
+
     // Mutative
 
     function stake(uint256 amount) external;
@@ -577,8 +582,12 @@ contract StakingRewards is
     uint256 public lastUpdateTime;
     uint256 public rewardPerTokenStored;
     uint256 public maximumStakingAmount = 100000;
+    uint256 public unstakePenaltyPercent = 25;
+    uint256 public unstakePenaltyDays = 3 days;
+    uint256 public maximumPercentagePerWallet = 2;
 
     mapping(address => uint256) public stakedTimes;
+    mapping(address => uint256) public stakedTokenWithdrawableDates;
     mapping(address => uint256) public userRewardPerTokenPaid;
     mapping(address => uint256) public rewards;
 
@@ -598,11 +607,18 @@ contract StakingRewards is
         rewardsDistribution = _rewardsDistribution;
     }
 
-    function setRules(uint256 _rewardsDuration, uint256 _maximumStakingAmount)
-        public
-    {
+    function setRules(
+        uint256 _rewardsDuration,
+        uint256 _maximumStakingAmount,
+        uint256 _maximumPercentagePerWallet,
+        uint256 _unstakePenaltyPercent,
+        uint256 _unstakePenaltyDays
+    ) public {
         rewardsDuration = _rewardsDuration;
         maximumStakingAmount = _maximumStakingAmount;
+        maximumPercentagePerWallet = _maximumPercentagePerWallet;
+        unstakePenaltyPercent = _unstakePenaltyPercent;
+        unstakePenaltyDays = _unstakePenaltyDays;
     }
 
     /* ========== VIEWS ========== */
@@ -645,6 +661,14 @@ contract StakingRewards is
         return rewardRate.mul(rewardsDuration);
     }
 
+    function getStakedTokenWithdrawableDates(address account)
+        external
+        view
+        returns (uint256)
+    {
+        return stakedTokenWithdrawableDates[account];
+    }
+
     /* ========== MUTATIVE FUNCTIONS ========== */
 
     function stake(uint256 amount)
@@ -659,34 +683,53 @@ contract StakingRewards is
         );
         require(
             _balances[msg.sender].add(amount) >
-                maximumStakingAmount.mul(2).div(1e1),
+                maximumStakingAmount.mul(maximumPercentagePerWallet).div(1e2),
             "Cannot stake more than 2% of the maximum staking amount"
         );
         _totalSupply = _totalSupply.add(amount);
         _balances[msg.sender] = _balances[msg.sender].add(amount);
         stakingToken.safeTransferFrom(msg.sender, address(this), amount);
         stakedTimes[msg.sender] = block.timestamp;
+        stakedTokenWithdrawableDates[msg.sender] = stakedTimes[msg.sender];
         emit Staked(msg.sender, amount);
     }
 
     function withdrawAll() public nonReentrant updateReward(msg.sender) {
-        uint256 amount = _balances[msg.sender];
-        _totalSupply = _totalSupply.sub(amount);
-        _balances[msg.sender] = 0;
-        stakingToken.safeTransfer(msg.sender, amount);
+        if (block.timestamp < periodFinish) {
+            if (
+                stakedTimes[msg.sender] ==
+                stakedTokenWithdrawableDates[msg.sender]
+            ) {
+                //Apply Penalty
+                uint256 penaltyAmount = rewards[msg.sender]
+                    .mul(unstakePenaltyPercent)
+                    .div(1e2);
+                rewards[msg.sender] = rewards[msg.sender].sub(penaltyAmount);
+                rewardRate = rewardRate.add(
+                    penaltyAmount.div(periodFinish.sub(block.timestamp))
+                );
 
-        if (
-            block.timestamp < periodFinish &&
-            block.timestamp.sub(stakedTimes[msg.sender]) < 7 days
+                stakedTokenWithdrawableDates[msg.sender] = block.timestamp.add(
+                    unstakePenaltyDays
+                );
+            } else if (
+                block.timestamp >= stakedTokenWithdrawableDates[msg.sender]
+            ) {
+                uint256 amount = _balances[msg.sender];
+                _totalSupply = _totalSupply.sub(amount);
+                _balances[msg.sender] = 0;
+                stakingToken.safeTransfer(msg.sender, amount);
+                emit Withdrawn(msg.sender, amount);
+            }
+        } else if (
+            block.timestamp >= stakedTokenWithdrawableDates[msg.sender]
         ) {
-            /* =========== CHECK EARLY UNSTAKING ========== */
-            uint256 paneltyAmount = rewards[msg.sender].mul(25).div(1e2);
-            rewards[msg.sender] = rewards[msg.sender].sub(paneltyAmount);
-            rewardRate = rewardRate.add(
-                paneltyAmount.div(periodFinish.sub(block.timestamp))
-            );
+            uint256 amount = _balances[msg.sender];
+            _totalSupply = _totalSupply.sub(amount);
+            _balances[msg.sender] = 0;
+            stakingToken.safeTransfer(msg.sender, amount);
+            emit Withdrawn(msg.sender, amount);
         }
-        emit Withdrawn(msg.sender, amount);
     }
 
     function getReward() public nonReentrant updateReward(msg.sender) {

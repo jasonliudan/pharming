@@ -156,3 +156,8 @@ export const poolGetMaximumStakingAmountSuccess = (payload) => {
         payload
     }
 }
+export const poolGetStakedTokenWithdrawableDates = ()=>{
+    return {
+        type: constants.POOL_GET_STAKED_TOKEN_WITHDRAWABLE_DATES
+    }
+}

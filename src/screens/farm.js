@@ -15,6 +15,7 @@ import {
     poolGetStakeTokenBalance,
     poolGetPeriodFinish,
     poolGetMaximumStakingAmount,
+    poolGetStakedTokenWithdrawableDates,
     poolSetContract,
     poolStake,
     poolWithdraw,
@@ -87,6 +88,7 @@ class Farm extends Component {
             this.props.loadStaked();
             this.props.loadEarned();
             this.props.getStakeTokenBalance();
+            this.props.getStakedTokenWithdrawableDates();
         }
     }
 
@@ -145,9 +147,15 @@ class Farm extends Component {
 
 const InfoCardWrapper = styled.div`
     display: flex;
-    height: 100vh;
     padding-top: 90px;
     box-sizing: border-box;
+    @media screen and (min-width: 600px) and (max-width: 900px) {
+        padding-top: 0px;
+    }
+    @media screen and (max-width: 600px) {
+        padding-top: 0px;
+        flex-direction: column;
+    }
 `
 
 const mapStateToProps = state => ({
@@ -174,6 +182,7 @@ const mapDispatchToProps = dispatch => ({
     getStakeTokenBalance: () => dispatch(poolGetStakeTokenBalance()),
     getPeriodFinish: () => dispatch(poolGetPeriodFinish()),
     getMaximumStakingAmount: () => dispatch(poolGetMaximumStakingAmount()),
+    getStakedTokenWithdrawableDates: () => dispatch(poolGetStakedTokenWithdrawableDates()),
     stake: (payload) => dispatch(poolStake(payload)),
     unstake: (payload) => dispatch(poolWithdraw(payload)),
     loadAllowance: () => dispatch(poolLoadAllowance()),

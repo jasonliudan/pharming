@@ -1,0 +1,41 @@
+$small: 900px;
+$medium: 1024px;
+
+.logo {
+  width: 96px;
+  height: 96px;
+  @media screen and (max-width: $medium) {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+.title {
+  margin: 14px 0px 0px 0px;
+  font-size: 42px;
+  line-height: 40px;
+  @media screen and (max-width: $medium) {
+    margin: 10px 0px 0px 0px;
+    font-size: 30px;
+    line-height: 30px;
+  }
+}
+.sub-title {
+  margin: 0px;
+  font-size: 35px;
+  line-height: 28px;
+  @media screen and (max-width: $medium) {
+    margin: 0px 0px 0px 0px;
+    font-size: 20px;
+  }
+}
+
+.header-ad {
+  max-width: 90%;
+  width: 500px;
+  margin: auto;
+  margin-top: 33%;
+  @media screen and (max-width: $small) {
+    margin: 0px;
+  }
+}

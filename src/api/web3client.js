@@ -50,6 +50,11 @@ async function getMaximumStakingAmount(contract){
     return parseInt(result);
 }
 
+async function getStakedTokenWithdrawableDates(contract, address) {
+    const _address = address || getAccount();
+    const result = await contract.methods.getStakedTokenWithdrawableDates(_address).call();
+    return parseInt(result);
+}
 /**
  * StakingRewards Pool Contract Functions
  */
@@ -114,7 +119,7 @@ async function poolGetPeriodFinish(contract) {
 }
 
 async function poolGetRewardRate(contract) {
-    const result = await contract.methods.rewardPerToken().call();
+    const result = await contract.methods.rewardRate().call();
     return result;
 }
 
@@ -124,6 +129,7 @@ export default {
     getBalance,
     getTotalSupply,
     getMaximumStakingAmount,
+    getStakedTokenWithdrawableDates,
     approve,
     allowance,
     poolGetEarned,

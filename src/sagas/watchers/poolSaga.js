@@ -176,6 +176,21 @@ function* getMaximumStakingAmount() {
     }
 }
 
+function* getStakedTokenWithdrawableDates(){
+    try{
+        const state = yield select();
+        const account = state.accountReducer.account;
+        const poolContract = state.poolReducer.contract;
+        if (!account || !poolContract) return;
+
+        const withdrawableDate = yield web3client.getStakedTokenWithdrawableDates(poolContract, account);
+        console.log(withdrawableDate)
+      //  yield put(poolGetStakeTokenBalanceSuccess(balance));
+    }catch(err){
+        console.log(err)
+    }
+}
+
 export default function* watchGetUsersSaga() {
     yield takeLatest(constants.POOL_LOAD_ALLOWANCE, loadAllowance);
     yield takeLatest(constants.POOL_APPROVE_TOKEN, approve);
@@ -188,4 +203,5 @@ export default function* watchGetUsersSaga() {
     yield takeLatest(constants.POOL_GET_STAKE_TOKEN_BALANCE, getStakeTokenBalance);
     yield takeLatest(constants.POOL_GET_PERIOD_FINISH, getPeriodFinish);
     yield takeLatest(constants.POOL_GET_MAXIMUM_STAKING_AMOUNT, getMaximumStakingAmount);
+    yield takeLatest(constants.POOL_GET_STAKED_TOKEN_WITHDRAWABLE_DATES, getStakedTokenWithdrawableDates)
 }

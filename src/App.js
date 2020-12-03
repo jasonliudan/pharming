@@ -47,6 +47,12 @@ export const GlobalStyle = createGlobalStyle`
 
   .header{
     width: 40%;
+    @media only screen and (min-width: 900px) and (max-width: 1024px){
+      width: 30%;
+    }
+    @media only screen and (max-width: 900px){
+      width: 100%;
+    }
   }
   .bgdiv {
     display: flex;
@@ -58,6 +64,10 @@ export const GlobalStyle = createGlobalStyle`
     position: relative;
     color: white;
     font-size: 25px;
+    overflow: auto;
+    @media only screen and (max-width: 900px){
+      flex-direction: column;
+    }
   }
 
   .topleft {
@@ -78,12 +88,25 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .mainArea {
-    width: 60%;
+    width: 60%;    
+    margin-left: 20px;
+    text-align: center;
+    @media only screen and ( min-width: 900px) and (max-width: 1024px){
+      width: 70%;
+    }
+    @media only screen and (max-width: 900px){
+      width: 100%;
+      margin: 0px;
+    }
   }
 
   .cardWrapper{
     width: 50%;
     textAlign: center;
+    @media screen and (max-width: 900px) {
+      width: 100%;
+      margin-bottom: 40px;
+    }
   }
 `;
 

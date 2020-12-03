@@ -19,14 +19,14 @@ const UnstakeAllDialog = ({
     return (
         <Dialog onClose={onClose} open={open}>
             <DialogTitle>
-                <span>
+                <h3>
                     {dialogTitle}
-                </span>
+                </h3>
             </DialogTitle>
             <DialogContent>
                 <div>
-                    Are you sure want to unstake all &nbsp;
-                    <b>{numberWithDecimals(staked, stakeToken.decimals, Config.Utils.decimals)}?</b>
+                    25% of accumulated pharming rewards will be reduced as early unstake penalty.
+                    Pharming rewards are claimable after conclusion of pharming event. &nbsp;
                 </div>
             </DialogContent>
             <DialogActions>

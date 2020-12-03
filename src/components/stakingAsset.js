@@ -13,7 +13,7 @@ import 'react-circular-progressbar/dist/styles.css';
 export const StakeAsset = ({ totalStaked, staked, allowed, onApprove, onStake, onUnstakeAll, balance, rewardBalance, stakeTokenInfo, rewardRate, rewardTokenInfo, maximumStakingAmount }) => {
     const [stakeDialogOpen, setStakeDialogOpen] = React.useState(false);
     const [unstakeDialogOpen, setUnstakeDialogOpen] = React.useState(false);
-console.log( rewardRate * (staked / totalStaked) / Math.pow(10, 18) * 3600  * 24 * 30)
+
     return (
         <Card>
             <div>
@@ -30,6 +30,7 @@ console.log( rewardRate * (staked / totalStaked) / Math.pow(10, 18) * 3600  * 24
                                 {numberWithDecimals(staked, stakeTokenInfo.decimals, Config.Utils.decimals)}
                             </p>
                             <p style={{fontSize: '18px', fontWeight: '900', color: '#4a9eff', marginTop: '30px'}}>Out of {numberWithDecimals(totalStaked, stakeTokenInfo.decimals, Config.Utils.decimals)}</p>
+                            {totalStaked !== 0 && <p>{(staked/totalStaked*100).toFixed(2)}%</p>}
                         </TextInsideProgress>
                     </div>
                     <div style={{marginTop: '20px'}}>
@@ -77,8 +78,8 @@ console.log( rewardRate * (staked / totalStaked) / Math.pow(10, 18) * 3600  * 24
                 totalStaked={totalStaked}
                 userBalance={balance}
                 dialogTitle={(
-                    <div>
-                        <img src={stakeTokenInfo.image} alt={stakeTokenInfo.name} width={35} />
+                    <div style={{display: 'flex'}}>
+                        <img src={stakeTokenInfo.image} alt={stakeTokenInfo.name} width={35} /> &nbsp;&nbsp;
                         <span>{`Stake ${stakeTokenInfo.symbol}`}</span>
                     </div>
                 )}
@@ -90,8 +91,8 @@ console.log( rewardRate * (staked / totalStaked) / Math.pow(10, 18) * 3600  * 24
                 stakeToken={stakeTokenInfo}
                 staked={staked}
                 dialogTitle={(
-                    <div>
-                        <img src={stakeTokenInfo.image} alt={stakeTokenInfo.name} />
+                    <div style={{display: 'flex'}}>
+                        <img src={stakeTokenInfo.image} alt={stakeTokenInfo.name} /> &nbsp;&nbsp;
                         <span>{`Withdraw ${stakeTokenInfo.symbol}`}</span>
                     </div>
                 )}
@@ -118,7 +119,7 @@ const RewardInfo = styled.div`
     background-color: #4a9eff;
     color: #130035;
     height: 48px;
-    width: 250px;
+    max-width: 250px;
     border-radius: 10px;
     margin: auto;
     margin-top: 5px;

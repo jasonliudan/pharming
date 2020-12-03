@@ -152,15 +152,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnerChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnerNominated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isPaused\",\"type\":\"bool\"}],\"name\":\"PauseChanged\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[],\"name\":\"acceptOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"lastPauseTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"nominateNewOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"nominatedOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_paused\",\"type\":\"bool\"}],\"name\":\"setPaused\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"setPaused(bool)\":{\"details\":\"Only the contract owner may call this.\"}}},\"userdoc\":{\"methods\":{\"setPaused(bool)\":{\"notice\":\"Change the paused state of the contract\"}}}},\"settings\":{\"compilationTarget\":{\"/Volumes/Work/Blockchain/Phantasma/pharming-smart-contract/contracts/Pausable.sol\":\"Pausable\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Volumes/Work/Blockchain/Phantasma/pharming-smart-contract/contracts/Owned.sol\":{\"keccak256\":\"0x8f9089ccabcdc5649dd2ccd2cc03744cda4d69119f269e9fbc724129d7a1936d\",\"urls\":[\"bzz-raw://901ead2ad6915ebacd10455c69714429b802eba8167b6b4135378a48dea18feb\",\"dweb:/ipfs/QmW26vxPaP3Ka8oH8yVvNscjWnvdefmQcy5urGVjECwxCk\"]},\"/Volumes/Work/Blockchain/Phantasma/pharming-smart-contract/contracts/Pausable.sol\":{\"keccak256\":\"0x0040021d342f6b593147bffb993753b458d2ecc7e407266423642e9a172b0b8e\",\"urls\":[\"bzz-raw://cd57827d138c4e41e3387e4ca161c270e156746610b30fc40ea2410e2e2ef5f3\",\"dweb:/ipfs/QmQ2MmaPcrMVovBrijBiA7FeRKvCNXahzv2PKp79vdBLkG\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnerChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnerNominated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isPaused\",\"type\":\"bool\"}],\"name\":\"PauseChanged\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[],\"name\":\"acceptOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"lastPauseTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"nominateNewOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"nominatedOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_paused\",\"type\":\"bool\"}],\"name\":\"setPaused\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"setPaused(bool)\":{\"details\":\"Only the contract owner may call this.\"}}},\"userdoc\":{\"methods\":{\"setPaused(bool)\":{\"notice\":\"Change the paused state of the contract\"}}}},\"settings\":{\"compilationTarget\":{\"/Volumes/Work/Blockchain/Phantasma/forked/pharming/smart-contract/contracts/Pausable.sol\":\"Pausable\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Volumes/Work/Blockchain/Phantasma/forked/pharming/smart-contract/contracts/Owned.sol\":{\"keccak256\":\"0x8f9089ccabcdc5649dd2ccd2cc03744cda4d69119f269e9fbc724129d7a1936d\",\"urls\":[\"bzz-raw://901ead2ad6915ebacd10455c69714429b802eba8167b6b4135378a48dea18feb\",\"dweb:/ipfs/QmW26vxPaP3Ka8oH8yVvNscjWnvdefmQcy5urGVjECwxCk\"]},\"/Volumes/Work/Blockchain/Phantasma/forked/pharming/smart-contract/contracts/Pausable.sol\":{\"keccak256\":\"0x0040021d342f6b593147bffb993753b458d2ecc7e407266423642e9a172b0b8e\",\"urls\":[\"bzz-raw://cd57827d138c4e41e3387e4ca161c270e156746610b30fc40ea2410e2e2ef5f3\",\"dweb:/ipfs/QmQ2MmaPcrMVovBrijBiA7FeRKvCNXahzv2PKp79vdBLkG\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5.16;\n\n// Inheritance\nimport \"./Owned.sol\";\n\n\n// https://docs.synthetix.io/contracts/Pausable\ncontract Pausable is Owned {\n    uint public lastPauseTime;\n    bool public paused;\n\n    constructor() internal {\n        // This contract is abstract, and thus cannot be instantiated directly\n        require(owner != address(0), \"Owner must be set\");\n        // Paused will be false, and lastPauseTime will be 0 upon initialisation\n    }\n\n    /**\n     * @notice Change the paused state of the contract\n     * @dev Only the contract owner may call this.\n     */\n    function setPaused(bool _paused) external onlyOwner {\n        // Ensure we're actually changing the state before we do anything\n        if (_paused == paused) {\n            return;\n        }\n\n        // Set our paused state.\n        paused = _paused;\n\n        // If applicable, set the last pause time.\n        if (paused) {\n            lastPauseTime = now;\n        }\n\n        // Let everyone know that our pause state has changed.\n        emit PauseChanged(paused);\n    }\n\n    event PauseChanged(bool isPaused);\n\n    modifier notPaused {\n        require(!paused, \"This action cannot be performed while the contract is paused\");\n        _;\n    }\n}\n",
-  "sourcePath": "/Volumes/Work/Blockchain/Phantasma/pharming-smart-contract/contracts/Pausable.sol",
+  "sourcePath": "/Volumes/Work/Blockchain/Phantasma/forked/pharming/smart-contract/contracts/Pausable.sol",
   "ast": {
-    "absolutePath": "/Volumes/Work/Blockchain/Phantasma/pharming-smart-contract/contracts/Pausable.sol",
+    "absolutePath": "/Volumes/Work/Blockchain/Phantasma/forked/pharming/smart-contract/contracts/Pausable.sol",
     "exportedSymbols": {
       "Pausable": [
         163
@@ -181,7 +181,7 @@
         "src": "0:24:1"
       },
       {
-        "absolutePath": "/Volumes/Work/Blockchain/Phantasma/pharming-smart-contract/contracts/Owned.sol",
+        "absolutePath": "/Volumes/Work/Blockchain/Phantasma/forked/pharming/smart-contract/contracts/Owned.sol",
         "file": "./Owned.sol",
         "id": 100,
         "nodeType": "ImportDirective",
@@ -410,10 +410,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1767,
-                        1768
+                        1649,
+                        1650
                       ],
-                      "referencedDeclaration": 1768,
+                      "referencedDeclaration": 1650,
                       "src": "314:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -634,7 +634,7 @@
                             "name": "now",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1766,
+                            "referencedDeclaration": 1648,
                             "src": "932:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -897,10 +897,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1767,
-                        1768
+                        1649,
+                        1650
                       ],
-                      "referencedDeclaration": 1768,
+                      "referencedDeclaration": 1650,
                       "src": "1126:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -953,7 +953,7 @@
     "src": "0:1227:1"
   },
   "legacyAST": {
-    "absolutePath": "/Volumes/Work/Blockchain/Phantasma/pharming-smart-contract/contracts/Pausable.sol",
+    "absolutePath": "/Volumes/Work/Blockchain/Phantasma/forked/pharming/smart-contract/contracts/Pausable.sol",
     "exportedSymbols": {
       "Pausable": [
         163
@@ -974,7 +974,7 @@
         "src": "0:24:1"
       },
       {
-        "absolutePath": "/Volumes/Work/Blockchain/Phantasma/pharming-smart-contract/contracts/Owned.sol",
+        "absolutePath": "/Volumes/Work/Blockchain/Phantasma/forked/pharming/smart-contract/contracts/Owned.sol",
         "file": "./Owned.sol",
         "id": 100,
         "nodeType": "ImportDirective",
@@ -1203,10 +1203,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1767,
-                        1768
+                        1649,
+                        1650
                       ],
-                      "referencedDeclaration": 1768,
+                      "referencedDeclaration": 1650,
                       "src": "314:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1427,7 +1427,7 @@
                             "name": "now",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1766,
+                            "referencedDeclaration": 1648,
                             "src": "932:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -1690,10 +1690,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1767,
-                        1768
+                        1649,
+                        1650
                       ],
-                      "referencedDeclaration": 1768,
+                      "referencedDeclaration": 1650,
                       "src": "1126:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1751,7 +1751,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.4",
-  "updatedAt": "2020-11-16T20:37:10.708Z",
+  "updatedAt": "2020-11-26T04:19:37.071Z",
   "devdoc": {
     "methods": {
       "setPaused(bool)": {
