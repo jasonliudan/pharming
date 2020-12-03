@@ -55,6 +55,12 @@ async function getStakedTokenWithdrawableDates(contract, address) {
     const result = await contract.methods.getStakedTokenWithdrawableDates(_address).call();
     return parseInt(result);
 }
+
+async function getLockedTokenBalance(contract, address){
+    const _address = address || getAccount();
+    const result = await contract.methods.lockedBalanceOf(_address).call();
+    return parseInt(result);
+}
 /**
  * StakingRewards Pool Contract Functions
  */
@@ -130,6 +136,7 @@ export default {
     getTotalSupply,
     getMaximumStakingAmount,
     getStakedTokenWithdrawableDates,
+    getLockedTokenBalance,
     approve,
     allowance,
     poolGetEarned,

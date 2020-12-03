@@ -16,6 +16,7 @@ import {
     poolGetPeriodFinish,
     poolGetMaximumStakingAmount,
     poolGetStakedTokenWithdrawableDates,
+    poolGetLockedTokenBalance,
     poolSetContract,
     poolStake,
     poolWithdraw,
@@ -89,6 +90,7 @@ class Farm extends Component {
             this.props.loadEarned();
             this.props.getStakeTokenBalance();
             this.props.getStakedTokenWithdrawableDates();
+            this.props.getLockedTokenBalance();
         }
     }
 
@@ -119,8 +121,10 @@ class Farm extends Component {
                                 staked={this.props.staked}
                                 totalStaked={this.props.totalStaked}
                                 balance={this.props.stakeTokenBalance}
+                                locked={this.props.locked}
                                 rewardBalance={this.props.poolInfo.balance}
                                 maximumStakingAmount={this.props.maximumStakingAmount}
+                                withdrawableDate={this.props.withdrawableDate}
                                 periodFinish={periodFinish}
                                 onApprove={() => this.props.approve()}
                                 onStake={(amount) => this.props.stake(amount)}
@@ -164,13 +168,15 @@ const mapStateToProps = state => ({
     staked: state.poolReducer.staked,
     allowance: state.poolReducer.allowance,
     earned: state.poolReducer.earned,
+    locked: state.poolReducer.locked,
     periodFinish: state.poolReducer.periodFinish,
     stakeTokenBalance: state.poolReducer.stakeTokenBalance,
     deadline: state.poolReducer.deadline,
     stakeTokenInfo: state.poolReducer.stakeTokenInfo,
     rewardTokenInfo: state.poolReducer.rewardTokenInfo,
     poolInfo: state.poolReducer.poolInfo,
-    maximumStakingAmount: state.poolReducer.maximumStakingAmount
+    maximumStakingAmount: state.poolReducer.maximumStakingAmount,
+    withdrawableDate: state.poolReducer.withdrawableDate
 });
 const mapDispatchToProps = dispatch => ({
     setAccount: (account) => dispatch(setAccount(account)),
@@ -183,6 +189,7 @@ const mapDispatchToProps = dispatch => ({
     getPeriodFinish: () => dispatch(poolGetPeriodFinish()),
     getMaximumStakingAmount: () => dispatch(poolGetMaximumStakingAmount()),
     getStakedTokenWithdrawableDates: () => dispatch(poolGetStakedTokenWithdrawableDates()),
+    getLockedTokenBalance: () => dispatch(poolGetLockedTokenBalance()),
     stake: (payload) => dispatch(poolStake(payload)),
     unstake: (payload) => dispatch(poolWithdraw(payload)),
     loadAllowance: () => dispatch(poolLoadAllowance()),

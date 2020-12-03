@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import Config from 'lib/config';
 import { numberWithDecimals } from 'utils';
@@ -10,10 +11,11 @@ import UnstakeAllDialog from 'components/dialogs/unstakeAllDialog';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-export const StakeAsset = ({ totalStaked, staked, allowed, onApprove, onStake, onUnstakeAll, balance, rewardBalance, stakeTokenInfo, rewardRate, rewardTokenInfo, maximumStakingAmount }) => {
+export const StakeAsset = ({ totalStaked, staked, locked, allowed, onApprove, onStake, onUnstakeAll, balance, withdrawableDate, rewardBalance, stakeTokenInfo, rewardRate, rewardTokenInfo, maximumStakingAmount }) => {
     const [stakeDialogOpen, setStakeDialogOpen] = React.useState(false);
     const [unstakeDialogOpen, setUnstakeDialogOpen] = React.useState(false);
 
+    const withdrawDate = new Date(withdrawableDate);
     return (
         <Card>
             <div>
@@ -26,9 +28,13 @@ export const StakeAsset = ({ totalStaked, staked, allowed, onApprove, onStake, o
                         maxValue={numberWithDecimals(totalStaked, stakeTokenInfo.decimals, Config.Utils.decimals)} strokeWidth={3} />
                         <TextInsideProgress>
                             <img src={require('assets/icons/phantasma-small.svg')} alt={stakeTokenInfo.name} />
-                            <p style={{fontSize: '50px', lineHeight: '30px'}}>
-                                {numberWithDecimals(staked, stakeTokenInfo.decimals, Config.Utils.decimals)}
-                            </p>
+                            {locked ===0 ?
+                                <p style={{fontSize: '50px', lineHeight: '30px'}}>
+                                    {numberWithDecimals(staked, stakeTokenInfo.decimals, Config.Utils.decimals)}
+                                </p>: 
+                                <p>
+                                    {numberWithDecimals(locked, stakeTokenInfo.decimals, Config.Utils.decimals)} Locked until {moment.unix(withdrawDate).format('MM/DD/YYYY')}
+                                </p>}
                             <p style={{fontSize: '18px', fontWeight: '900', color: '#4a9eff', marginTop: '30px'}}>Out of {numberWithDecimals(totalStaked, stakeTokenInfo.decimals, Config.Utils.decimals)}</p>
                             {totalStaked !== 0 && <p>{(staked/totalStaked*100).toFixed(2)}%</p>}
                         </TextInsideProgress>

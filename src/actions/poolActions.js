@@ -161,3 +161,20 @@ export const poolGetStakedTokenWithdrawableDates = ()=>{
         type: constants.POOL_GET_STAKED_TOKEN_WITHDRAWABLE_DATES
     }
 }
+export const poolGetStakedTokenWithdrawableDatesSuccess = (payload)=>{
+    return {
+        type: constants.POOL_GET_STAKED_TOKEN_WITHDRAWABLE_DATES_SUCCESS,
+        payload
+    }
+}
+export const poolGetLockedTokenBalance = () =>{
+    return {
+        type: constants.POOL_GET_LOCKED_TOKEN_BALANCE
+    }
+}
+export const poolGetLockedTokenBalanceSuccess = (payload) =>{
+    return {
+        type: constants.POOL_GET_LOCKED_TOKEN_BALANCE_SUCCESS,
+        payload
+    }
+}

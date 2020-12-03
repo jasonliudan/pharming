@@ -14,6 +14,8 @@ interface IStakingRewards {
 
     function balanceOf(address account) external view returns (uint256);
 
+    function lockedBalanceOf(address account) external view returns (uint256);
+
     function getStakedTokenWithdrawableDates(address account)
         external
         view

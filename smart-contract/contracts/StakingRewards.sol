@@ -33,6 +33,7 @@ contract StakingRewards is
     uint256 public maximumPercentagePerWallet = 2;
 
     mapping(address => uint256) public stakedTimes;
+    mapping(address => uint256) public lockedBalances;
     mapping(address => uint256) public stakedTokenWithdrawableDates;
     mapping(address => uint256) public userRewardPerTokenPaid;
     mapping(address => uint256) public rewards;
@@ -75,6 +76,10 @@ contract StakingRewards is
 
     function balanceOf(address account) external view returns (uint256) {
         return _balances[account];
+    }
+
+    function lockedBalanceOf(address account) external view returns (uint256) {
+        return lockedBalances[account];
     }
 
     function lastTimeRewardApplicable() public view returns (uint256) {
@@ -141,38 +146,27 @@ contract StakingRewards is
     }
 
     function withdrawAll() public nonReentrant updateReward(msg.sender) {
-        if (block.timestamp < periodFinish) {
-            if (
-                stakedTimes[msg.sender] ==
-                stakedTokenWithdrawableDates[msg.sender]
-            ) {
-                //Apply Penalty
-                uint256 penaltyAmount = rewards[msg.sender]
-                    .mul(unstakePenaltyPercent)
-                    .div(1e2);
-                rewards[msg.sender] = rewards[msg.sender].sub(penaltyAmount);
-                rewardRate = rewardRate.add(
-                    penaltyAmount.div(periodFinish.sub(block.timestamp))
-                );
+        if (lockedBalances[msg.sender] == 0) {
+            //Apply Penalty
+            uint256 penaltyAmount = rewards[msg.sender]
+                .mul(unstakePenaltyPercent)
+                .div(1e2);
+            rewards[msg.sender] = rewards[msg.sender].sub(penaltyAmount);
+            rewardRate = rewardRate.add(
+                penaltyAmount.div(periodFinish.sub(block.timestamp))
+            );
 
-                stakedTokenWithdrawableDates[msg.sender] = block.timestamp.add(
-                    unstakePenaltyDays
-                );
-            } else if (
-                block.timestamp >= stakedTokenWithdrawableDates[msg.sender]
-            ) {
-                uint256 amount = _balances[msg.sender];
-                _totalSupply = _totalSupply.sub(amount);
-                _balances[msg.sender] = 0;
-                stakingToken.safeTransfer(msg.sender, amount);
-                emit Withdrawn(msg.sender, amount);
-            }
+            _totalSupply = _totalSupply.sub(_balances[msg.sender]);
+            lockedBalances[msg.sender] = _balances[msg.sender];
+            _balances[msg.sender] = 0;
+            stakedTokenWithdrawableDates[msg.sender] = block.timestamp.add(
+                unstakePenaltyDays
+            );
         } else if (
             block.timestamp >= stakedTokenWithdrawableDates[msg.sender]
         ) {
-            uint256 amount = _balances[msg.sender];
-            _totalSupply = _totalSupply.sub(amount);
-            _balances[msg.sender] = 0;
+            uint256 amount = lockedBalances[msg.sender];
+            lockedBalances[msg.sender] = 0;
             stakingToken.safeTransfer(msg.sender, amount);
             emit Withdrawn(msg.sender, amount);
         }

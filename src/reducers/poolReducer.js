@@ -8,10 +8,12 @@ const initialState = {
     rewardTokenInfo: null,
     allowance: 0,
     staked: 0,
+    locked: 0,
     totalStaked: 0,
     stakeTokenBalance: 0,
     earned: 0,
     periodFinish: new Date(),
+    withdrawableDate: new Date(),
     maximumStakingAmount: 0
 };
 
@@ -81,6 +83,16 @@ export default function setBrowserInfo(state = initialState, action) {
             return {
                 ...state,
                 maximumStakingAmount: action.payload
+            }
+        case constants.POOL_GET_STAKED_TOKEN_WITHDRAWABLE_DATES_SUCCESS:
+            return {
+                ...state,
+                withdrawableDate: action.payload
+            }
+        case constants.POOL_GET_LOCKED_TOKEN_BALANCE_SUCCESS:
+            return {
+                ...state,
+                locked: action.payload
             }
         default:
             return state;
