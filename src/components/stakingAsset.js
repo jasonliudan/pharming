@@ -33,7 +33,7 @@ export const StakeAsset = ({ totalStaked, staked, locked, allowed, onApprove, on
                                     {numberWithDecimals(staked, stakeTokenInfo.decimals, Config.Utils.decimals)}
                                 </p>: 
                                 <p>
-                                    {numberWithDecimals(locked, stakeTokenInfo.decimals, Config.Utils.decimals)} Locked until {moment.unix(withdrawDate).format('MM/DD/YYYY')}
+                                    {numberWithDecimals(locked, stakeTokenInfo.decimals, Config.Utils.decimals)} Locked until {moment.unix(withdrawDate).format('DD/MM/YYYY')}
                                 </p>}
                             <p style={{fontSize: '18px', fontWeight: '900', color: '#4a9eff', marginTop: '30px'}}>Out of {numberWithDecimals(totalStaked, stakeTokenInfo.decimals, Config.Utils.decimals)}</p>
                             {totalStaked !== 0 && <p>{(staked/totalStaked*100).toFixed(2)}%</p>}
